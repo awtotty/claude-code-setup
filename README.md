@@ -1,29 +1,51 @@
-# Claude Code Settings
+# Claude Code Setup
 
 Shared Claude Code setup: devcontainer sandbox, custom skills, and settings.
 
 ## Quick Start
 
 ```bash
-git clone <this-repo> ~/programs/claude-code-settings
-cd ~/programs/claude-code-settings
+git clone <this-repo> ~/programs/claude-code-setup
+cd ~/programs/claude-code-setup
 ./install.sh
 ```
 
 Re-run with `--force` to overwrite existing skills.
 
+## Usage
+
+### Prerequisites
+
+Install the devcontainer CLI if you don't have it:
+
+```bash
+npm install -g @devcontainers/cli
+```
+
+### Start the sandbox
+
+After running `install.sh`, start a devcontainer for any project:
+
+```bash
+# Start the container (uses ~/.claude/.devcontainer config)
+devcontainer up --workspace-folder /path/to/your/project
+
+# Run Claude inside the container with bypass permissions
+devcontainer exec --workspace-folder /path/to/your/project claude --dangerously-skip-permissions
+
+# Or open a shell in the container
+devcontainer exec --workspace-folder /path/to/your/project zsh
+```
+
+Your `~/.claude` directory is bind-mounted into the container, so skills, settings, and auth all carry over.
+
 ## What's Included
 
-### Devcontainer (sandbox for bypass permissions)
+### Devcontainer
 
-A Docker-based sandbox that lets you run `claude --dangerously-skip-permissions` safely. It uses iptables firewall rules to restrict network access to only:
+A Docker-based sandbox for running Claude Code with `--dangerously-skip-permissions`. Based on `node:20` with zsh, git-delta, gh CLI, and Claude Code pre-installed.
 
-- GitHub (API, web, git)
-- npm registry
-- Anthropic API
-- VS Code marketplace
-
-Installed to `~/.claude/.devcontainer/`. Requires Docker with `--cap-add=NET_ADMIN` and `--cap-add=NET_RAW`.
+Installed to `~/.claude/.devcontainer/`.
 
 ### Skills
 
@@ -47,6 +69,6 @@ Merged into `~/.claude/settings.json` (won't overwrite your existing settings).
 
 ## Customizing
 
-- **Add allowed domains**: Edit `devcontainer/init-firewall.sh`, add entries to the domain loop
 - **Add skills**: Create a new directory under `skills/` with a `SKILL.md` file
 - **Change settings**: Edit `settings.json` — values here win during merge
+- **Modify the container**: Edit `devcontainer/Dockerfile`, then re-run `install.sh` and rebuild
