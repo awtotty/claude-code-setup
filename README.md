@@ -27,7 +27,7 @@ npm install -g @devcontainers/cli
 Copy the devcontainer config into your project:
 
 ```bash
-cp -r ~/programs/claude-code-setup/devcontainer /path/to/your/project/.devcontainer
+cp -r ~/programs/claude-code-setup/.devcontainer /path/to/your/project/.devcontainer
 ```
 
 Then start it:
@@ -51,7 +51,7 @@ Your `~/.claude` directory is bind-mounted into the container, so skills, settin
 
 A Docker-based sandbox for running Claude Code with `--dangerously-skip-permissions`. Based on `node:20` with zsh, git-delta, gh CLI, and Claude Code pre-installed.
 
-Copy `devcontainer/` into your project as `.devcontainer/`.
+Copy `.devcontainer/` into your project.
 
 ### Skills
 
@@ -77,4 +77,4 @@ Merged into `~/.claude/settings.json` (won't overwrite your existing settings).
 
 - **Add skills**: Create a new directory under `skills/` with a `SKILL.md` file
 - **Change settings**: Edit `settings.json` — values here win during merge
-- **Modify the container**: Edit `devcontainer/Dockerfile`, copy into your project again, and rebuild
+- **Modify the container**: Edit `.devcontainer/Dockerfile`, copy into your project again, and rebuild
