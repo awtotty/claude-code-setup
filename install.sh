@@ -39,15 +39,8 @@ else
     echo "  Install jq or manually copy settings.json to $CLAUDE_DIR/settings.json"
 fi
 
-# 3. Install devcontainer
-echo "Installing devcontainer..."
-mkdir -p "$CLAUDE_DIR/.devcontainer"
-cp "$SCRIPT_DIR"/devcontainer/* "$CLAUDE_DIR/.devcontainer/"
-echo "  Installed to $CLAUDE_DIR/.devcontainer/"
-
 echo ""
-echo "Done! Start the sandbox with:"
-echo "  devcontainer up --workspace-folder /path/to/your/project"
+echo "Done! Skills and settings installed to $CLAUDE_DIR"
 echo ""
-echo "Then run Claude inside it:"
-echo "  devcontainer exec --workspace-folder /path/to/your/project claude --dangerously-skip-permissions"
+echo "To use the devcontainer, copy it into your project:"
+echo "  cp -r $SCRIPT_DIR/devcontainer /path/to/your/project/.devcontainer"

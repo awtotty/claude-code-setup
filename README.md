@@ -22,12 +22,18 @@ Install the devcontainer CLI if you don't have it:
 npm install -g @devcontainers/cli
 ```
 
-### Start the sandbox
+### Set up the devcontainer
 
-After running `install.sh`, start a devcontainer for any project:
+Copy the devcontainer config into your project:
 
 ```bash
-# Start the container (uses ~/.claude/.devcontainer config)
+cp -r ~/programs/claude-code-setup/devcontainer /path/to/your/project/.devcontainer
+```
+
+Then start it:
+
+```bash
+# Start the container
 devcontainer up --workspace-folder /path/to/your/project
 
 # Run Claude inside the container with bypass permissions
@@ -45,7 +51,7 @@ Your `~/.claude` directory is bind-mounted into the container, so skills, settin
 
 A Docker-based sandbox for running Claude Code with `--dangerously-skip-permissions`. Based on `node:20` with zsh, git-delta, gh CLI, and Claude Code pre-installed.
 
-Installed to `~/.claude/.devcontainer/`.
+Copy `devcontainer/` into your project as `.devcontainer/`.
 
 ### Skills
 
@@ -55,7 +61,7 @@ Installed to `~/.claude/.devcontainer/`.
 | `/pr-desc` | Generate a PR description from the current branch diff |
 | `/pr-review` | Review the current branch like a code reviewer |
 
-Installed to `~/.claude/skills/`.
+Installed to `~/.claude/skills/` by `install.sh`.
 
 ### Settings
 
@@ -71,4 +77,4 @@ Merged into `~/.claude/settings.json` (won't overwrite your existing settings).
 
 - **Add skills**: Create a new directory under `skills/` with a `SKILL.md` file
 - **Change settings**: Edit `settings.json` — values here win during merge
-- **Modify the container**: Edit `devcontainer/Dockerfile`, then re-run `install.sh` and rebuild
+- **Modify the container**: Edit `devcontainer/Dockerfile`, copy into your project again, and rebuild
